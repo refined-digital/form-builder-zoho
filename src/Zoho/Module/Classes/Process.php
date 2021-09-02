@@ -1,6 +1,6 @@
 <?php
 
-namespace RefinedDigital\Zoho\Module\Classes;
+namespace RefinedDigital\FormBuilderZoho\Module\Classes;
 
 use RefinedDigital\CMS\Modules\Core\Models\EmailSubmission;
 use RefinedDigital\FormBuilder\Module\Contracts\FormBuilderCallbackInterface;

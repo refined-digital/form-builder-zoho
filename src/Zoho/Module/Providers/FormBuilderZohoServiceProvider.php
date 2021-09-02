@@ -1,6 +1,6 @@
 <?php
 
-namespace RefinedDigital\Zoho\Module\Providers;
+namespace RefinedDigital\FormBuilderZoho\Module\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

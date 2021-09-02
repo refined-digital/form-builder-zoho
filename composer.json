@@ -16,13 +16,13 @@
   ],
   "autoload": {
     "psr-4": {
-      "RefinedDigital\\Zoho\\": "src/"
+      "RefinedDigital\\FormBuilderZoho\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "RefinedDigital\\Zoho\\Module\\Providers\\FormBuilderZohoServiceProvider"
+        "RefinedDigital\\FormBuilderZoho\\Module\\Providers\\FormBuilderZohoServiceProvider"
       ],
       "aliases": {
       }
