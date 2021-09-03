@@ -9,19 +9,34 @@ class Process implements FormBuilderCallbackInterface {
 
   public function run($request, $form)
   {
-
-    $formBuilderRepository = new FormBuilderRepository();
-    $formBuilderRepository->compileAndSend($request, $form);
-
-    $url = 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+    $url = 'https://crm.zoho.com/crm/WebToLeadForm';
     $fields = [];
 
+    // set the form fields
     if (isset($form->fields) && $form->fields->count()) {
       foreach ($form->fields as $field) {
         if ($field->merge_field) {
           $fields[$field->merge_field] = $request[$field->field_name];
         }
       }
+    }
+
+    $notAField = ['_token', 'hname', 'htime'];
+    // set the hidden fields
+    $requestFields = $request->toArray();
+    if (sizeof($requestFields)) {
+      foreach ($requestFields as $field => $value) {
+        if (!in_array($field, $notAField) && preg_match_all('/^(field)\d*/', $field) < 1) {
+          $fields[str_replace('__', ' ', $field)] = $value;
+        }
+      }
+    }
+
+    // add the redirect code
+    if ($form->redirect_page) {
+      $fields['returnUrl'] = rtrim(config('app.url'), '/').$form->redirect_page;
+    } else {
+      $fields['returnUrl'] = rtrim(config('app.url'), '/').'/thank-you';
     }
 
     $curl = curl_init($url);
@@ -35,8 +50,8 @@ class Process implements FormBuilderCallbackInterface {
       $data = new \stdClass();
       $data->data = $request->toArray();
       $submissionData = [
-        'to'      => 'salesforce',
-        'from'    => 'salesforce',
+        'to'      => 'zoho',
+        'from'    => 'zoho',
         'ip'      => help()->getClientIP(),
         'form_id' => isset($form->id) ? $form->id : null,
         'data'    => $data
