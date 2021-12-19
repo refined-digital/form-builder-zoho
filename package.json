@@ -1,6 +1,6 @@
 {
   "name": "@refineddigital/cms-form-builder-zoho",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "scripts": {
     "publish-and-tag": "git push --tags && git push origin master",
     "version:patch": "npm version patch && npm run publish-and-tag",
