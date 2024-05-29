@@ -53,7 +53,7 @@ class Process implements FormBuilderCallbackInterface
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($fields));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_exec($curl);
-        curl_close();
+        curl_close($curl);
 
         // log a copy of it
         if(sizeof($fields)) {
